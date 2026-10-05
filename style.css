@@ -1,0 +1,329 @@
+/* Reset and base styles */
+:root {
+  --bg: #0b1020;
+  --bg-soft: #111b2d;
+  --panel: rgba(18, 28, 45, 0.8);
+  --panel-strong: rgba(13, 20, 33, 0.9);
+  --primary: #7c5cff;
+  --primary-2: #54d2ff;
+  --success: #20c997;
+  --warning: #f4b740;
+  --danger: #ff5b7d;
+  --text: #edf4ff;
+  --muted: #afbdd6;
+  --border: rgba(255, 255, 255, 0.12);
+  --shadow: 0 20px 45px rgba(9, 12, 20, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(124, 92, 255, 0.22), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(84, 210, 255, 0.18), transparent 28%),
+    var(--bg);
+  color: var(--text);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button, input {
+  font: inherit;
+}
+
+.container {
+  width: min(1180px, 100%);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  letter-spacing: -0.05em;
+  font-weight: 800;
+}
+
+.header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.upload-section {
+  display: flex;
+  justify-content: center;
+}
+
+.upload-area {
+  width: min(950px, 100%);
+  min-height: 220px;
+  border: 2px dashed rgba(125, 162, 255, 0.35);
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(17, 27, 45, 0.85), rgba(23, 32, 52, 0.8));
+  box-shadow: var(--shadow);
+  display: grid;
+  place-items: center;
+  padding: 32px 20px;
+  text-align: center;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.upload-area:hover,
+.upload-area.dragover {
+  transform: translateY(-1px);
+  border-color: rgba(124, 92, 255, 0.9);
+  box-shadow: 0 18px 38px rgba(124, 92, 255, 0.18);
+}
+
+.upload-icon {
+  font-size: clamp(2.3rem, 5vw, 4rem);
+  margin-bottom: 12px;
+}
+
+.upload-area h2 {
+  margin: 0 0 10px;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+.upload-area p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.preview-section {
+  background: rgba(15, 22, 35, 0.8);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  padding: 22px 18px 20px;
+}
+
+.preview-section.hidden {
+  display: none;
+}
+
+.preview-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.preview-item {
+  min-width: 0;
+}
+
+.preview-item h3 {
+  margin: 0 0 12px;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.image-frame {
+  position: relative;
+  min-height: 360px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(45deg, rgba(255,255,255,0.025) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.025) 75%),
+    linear-gradient(45deg, rgba(255,255,255,0.025) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.025) 75%),
+    rgba(9, 13, 22, 0.7);
+  background-position: 0 0, 16px 16px;
+  background-size: 32px 32px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#originalImage,
+#resultImage {
+  width: 100%;
+  height: 100%;
+  max-height: 580px;
+  object-fit: contain;
+  display: block;
+}
+
+#resultCanvas {
+  width: 100%;
+  height: 100%;
+  max-height: 580px;
+  display: block;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btn {
+  appearance: none;
+  border: none;
+  background: #1a2438;
+  color: var(--text);
+  padding: 14px 22px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  color: white;
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #1cc98d, #2ed2a4);
+  color: white;
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.loading-spinner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: rgba(12, 17, 25, 0.66);
+  backdrop-filter: blur(2px);
+  color: white;
+  z-index: 2;
+  padding: 12px;
+}
+
+.loading-spinner p {
+  margin-top: 12px;
+  color: #edf4ff;
+  font-weight: 600;
+}
+
+.spinner {
+  width: 52px;
+  height: 52px;
+  border: 4px solid rgba(255,255,255,0.18);
+  border-top-color: var(--primary-2);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-message {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 91, 125, 0.12);
+  color: #ffd7df;
+  border: 1px solid rgba(255, 91, 125, 0.28);
+  font-weight: 600;
+}
+
+.initial-state {
+  padding-top: 4px;
+}
+
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.info-card {
+  padding: 18px 16px;
+  border-radius: 18px;
+  background: rgba(17, 28, 45, 0.82);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+
+.info-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.info-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.info-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  body {
+    padding: 16px;
+  }
+
+  .preview-container,
+  .info-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .image-frame {
+    min-height: 280px;
+  }
+
+  .btn {
+    flex: 1 1 100%;
+  }
+
+  .upload-area {
+    min-height: 180px;
+  }
+}
