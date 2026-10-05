@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Background Remover</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✨ AI Background Remover</h1>
+            <p>Remove backgrounds from your photos instantly</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📸</div>
+                    <h2>Upload Your Photo</h2>
+                    <p>Drag and drop your image here or click to select</p>
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                </div>
+            </div>
+
+            <!-- Preview Section -->
+            <div id="previewSection" class="preview-section hidden">
+                <div class="preview-container">
+                    <div class="preview-item">
+                        <h3>Original Image</h3>
+                        <div class="image-frame">
+                            <img id="originalImage" src="" alt="Original">
+                        </div>
+                    </div>
+
+                    <div class="preview-item">
+                        <h3>Result</h3>
+                        <div class="image-frame">
+                            <canvas id="resultCanvas" style="display: none;"></canvas>
+                            <img id="resultImage" src="" alt="Result" style="display: none;">
+                            <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+                                <div class="spinner"></div>
+                                <p>Processing... This may take a moment</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="removeBtn" class="btn btn-primary">🪄 Remove Background</button>
+                    <button id="downloadBtn" class="btn btn-success" style="display: none;">⬇️ Download PNG</button>
+                    <button id="resetBtn" class="btn btn-secondary">↻ Start Over</button>
+                </div>
+
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+            </div>
+
+            <!-- Initial State -->
+            <div id="initialState" class="initial-state">
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-icon">🚀</div>
+                        <h3>Fast Processing</h3>
+                        <p>Get results in seconds</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🔒</div>
+                        <h3>100% Private</h3>
+                        <p>No server uploads</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">✅</div>
+                        <h3>High Quality</h3>
+                        <p>AI-powered precision</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.16.0/dist/ort.wasm.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.0/dist/index.browser.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
